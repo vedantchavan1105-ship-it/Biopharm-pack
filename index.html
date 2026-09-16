@@ -1,146 +1,427 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BioPharm-Pack | Verified Research Workspace</title>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BioPharm-Pack | Research Dashboard</title>
 <style>
-:root{--bg:#050d09;--p:#0b1d14;--p2:#10271c;--line:#244d3a;--g:#43e994;--g2:#b3ffd0;--m:#8fb3a0;--r:#ff9292;--y:#ffd66d;--blue:#8fd7ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 78% 0,#1b4631,#050d09 42%,#020604);color:#effff6;font-family:Inter,system-ui,Arial,sans-serif}
-header{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 25px;border-bottom:1px solid var(--line);background:#06120de8;backdrop-filter:blur(14px);position:sticky;top:0;z-index:50}.logo{font-size:20px;font-weight:1000}.logo b{color:var(--g)}.verified{font-size:9px;border:1px solid #347b59;color:var(--g2);padding:4px 7px;border-radius:99px;margin-left:8px}
-nav button{border:0;background:none;color:var(--m);font-weight:850;padding:9px;cursor:pointer}nav button.active{color:var(--g)}
-main{max-width:1300px;margin:auto;padding:25px}.view{display:none}.view.on{display:block}.badge{display:inline-block;padding:7px 11px;border-radius:99px;border:1px solid #2c7150;background:#092318;color:var(--g2);font-size:10px;font-weight:950}
-h1{font-size:56px;line-height:1;margin:14px 0}h2{font-size:31px;margin:8px 0 18px}h3{margin:5px 0 9px}p{color:var(--m);line-height:1.55}.hero{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center;min-height:535px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(180deg,#0d2419,#08150f);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 15px 45px #0006}.btn{border:1px solid #31835d;background:linear-gradient(180deg,#49ee99,#17b96b);color:#03120a;padding:12px 17px;border-radius:12px;font-weight:950;cursor:pointer;margin:5px}.btn.alt{background:#10251c;color:#effff6;border-color:var(--line)}.btn.blue{background:#102838;color:#b9e6ff;border-color:#285c77}
-.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.status-row{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.status{padding:5px 8px;border-radius:99px;border:1px solid #2c7150;background:#092318;color:var(--g2);font-size:9px;font-weight:900}.full{grid-column:1/-1}label{display:block;color:#bfe7d2;font-size:11px;font-weight:900;margin:8px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #295441;border-radius:10px;background:#06120d;color:#effff6;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--g)}
-.kpi{font-size:30px;color:var(--g);font-weight:1000}.small{font-size:10px;color:var(--m);font-weight:900}.meter{height:9px;border-radius:99px;background:#04100a;border:1px solid #214131;overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,#1fcf76,#a7ffd1)}
-table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid #19392b;text-align:left;font-size:12px}th{color:#bce4cf}.high{color:var(--r)}.med{color:var(--y)}.low{color:var(--g2)}
-.notice{padding:12px;border-radius:11px;background:#342a09;border:1px solid #66541b;color:#ffeaa0;font-size:11px;line-height:1.55}.trust{padding:12px;border-radius:11px;background:#09221a;border:1px solid #276747;color:#baf6d1;font-size:11px;line-height:1.55}
-.profile{display:flex;align-items:center;gap:12px}.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(145deg,#49ed98,#176b47);display:grid;place-items:center;color:#052013;font-weight:1000}
-.source{font-size:10px;color:#a6cdb8}.source b{color:var(--g2)}
-.standards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-.standards a{display:flex;flex-direction:column;gap:5px;padding:13px;border:1px solid var(--line);border-radius:12px;background:#07150f;color:#effff6;text-decoration:none}
-.standards a:hover{border-color:#43e994;transform:translateY(-1px)}
-.standards b{color:var(--g2);font-size:12px}.standards span{color:var(--m);font-size:10px;line-height:1.45}
-.evidence-overview{scroll-margin-top:85px}
+/* V18 evidence-first upgrades */
+@media(max-width:900px){.app{display:block}.side{display:none}.main{width:100%;min-width:0;padding:14px}.mobileBar{display:flex!important}.top{padding-top:10px}.grid,.grid2{grid-template-columns:1fr!important}.hero{min-height:auto;display:block}.hero .big3d{display:none}.table{font-size:12px}.table td,.table th{padding:9px 7px}.card{padding:14px}.big3d{width:100%;height:230px;display:grid}.cta button{flex:1;min-height:44px}.search,select,input{font-size:16px!important}.section{margin:18px 0 10px}.riskGrid{grid-template-columns:1fr!important}.scoreBox{margin-top:12px}.caseSteps{grid-template-columns:1fr!important}}
+@media(min-width:901px){.mobileBar{display:none!important}}
+:root{--bg:#07100d;--side:#0a1712;--card:#0d1f17;--card2:#10271d;--line:#234c39;--txt:#effaf4;--muted:#93ad9f;--g:#56e59a;--g2:#b9ffd2;--amber:#ffd27d;--red:#ff9999}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% -10%,#16452f 0,#07100d 38%);color:var(--txt);font-family:Inter,system-ui,Arial,sans-serif}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:22px 15px;background:#08130fdd;border-right:1px solid var(--line);backdrop-filter:blur(15px)}
+.logo{font-size:20px;font-weight:950;padding:8px 10px 25px}.logo span{color:var(--g)}.version{font-size:10px;color:#729b86;display:block;margin-top:5px;letter-spacing:1px}
+.nav button{width:100%;text-align:left;margin:4px 0;background:transparent;color:#a9c2b4;padding:12px;border:1px solid transparent}.nav button.active,.nav button:hover{background:#143325;border-color:#285940;color:var(--g)}.nav small{display:block;color:#618273;font-size:10px;margin:20px 10px 5px;font-weight:900;letter-spacing:1.3px}
+.main{padding:24px;max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.welcome h1{margin:0;font-size:clamp(28px,4vw,45px)}.welcome p{margin:7px 0;color:var(--muted)}.status{border:1px solid #2e6d51;border-radius:999px;padding:9px 13px;color:var(--g2);font-size:12px;background:#0c2017}
+.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.card{background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 55px #0004}.stat{min-height:125px}.stat .ico{font-size:27px}.stat .num{font-size:28px;font-weight:950;margin-top:9px}.muted{color:var(--muted)}.eyebrow{font-size:10px;font-weight:950;letter-spacing:1.5px;color:var(--g)}h2{margin:5px 0 7px;font-size:28px}h3{margin-top:0}.hero{padding:24px;min-height:270px;display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:#4fe39718;right:-100px;top:-120px}.hero h2{font-size:clamp(32px,5vw,60px);line-height:1;margin:10px 0;max-width:800px}.hero p{max-width:760px;line-height:1.6}.cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}button{border-radius:11px;border:1px solid #2b5d46;background:#12291f;color:white;padding:10px 14px;font-weight:850;cursor:pointer}button.primary{background:linear-gradient(135deg,#59e69b,#2caa70);color:#04110a;border:0}.big3d{width:260px;height:190px;border:1px solid #3c8662;border-radius:20px;background:radial-gradient(circle,#1a5c3d,#07110d 68%);display:grid;place-items:center;perspective:600px}.box3d{width:150px;height:105px;border:2px solid #91f5b7;border-radius:13px;transform:rotateX(55deg) rotateZ(-18deg);box-shadow:30px 30px 0 #06100b,0 0 60px #4fe39744;display:grid;place-items:center;color:#baffd0;font-weight:950}.section{margin:25px 0 12px}.progress{height:9px;background:#07100d;border:1px solid #244b3a;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:25%;background:linear-gradient(90deg,#49dc91,#b9ffd2)}.table{width:100%;border-collapse:collapse}.table td,.table th{padding:11px;border-bottom:1px solid #214535;text-align:left}.table th{font-size:11px;color:#9edbb7}.tag{display:inline-block;border:1px solid #32654e;border-radius:7px;padding:5px 8px;margin:3px;font-size:11px}.tag.green{color:var(--g2)}.tag.amber{color:var(--amber);border-color:#725c30}.tag.red{color:var(--red);border-color:#6e3d3d}.legal h3{margin-bottom:7px}.legal p,.legal li{color:#b1c7bb;line-height:1.55}.legalbox{max-height:420px;overflow:auto;border:1px solid #244c3a;border-radius:14px;padding:15px;background:#08130f}.search{width:100%;padding:12px;border-radius:11px;background:#08140f;border:1px solid #2a5743;color:white;margin-bottom:12px}a{color:#75efad}.footer{margin-top:25px;color:#678878;font-size:11px;text-align:center}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto}.nav button{min-width:max-content}.nav small{display:none}.grid{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.big3d{display:none}}
+@media(max-width:560px){.main{padding:15px}.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.hero{min-height:0}.hero h2{font-size:38px}}
 
-/* 3D */
-.scene{height:510px;border-radius:24px;border:1px solid #2a6047;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#1a4b35,#091a13 58%,#030806);perspective:1300px}.shadow{position:absolute;left:50%;bottom:40px;width:500px;height:150px;transform:translateX(-50%) rotateX(73deg);background:radial-gradient(ellipse,#000b,transparent 65%);filter:blur(5px)}.obj{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotateX(10deg) rotateY(-21deg);transform-style:preserve-3d;animation:float 5s ease-in-out infinite}@keyframes float{50%{transform:translate(-50%,-54%) rotateX(7deg) rotateY(-15deg)}}
-.box{width:350px;height:220px}.box .front{position:absolute;inset:0;border-radius:16px;background:linear-gradient(145deg,#fbfffd,#cfe7da 55%,#8bb8a3);border:2px solid #e8fff5;box-shadow:inset 0 0 28px #fff9,0 28px 50px #0009;transform:translateZ(27px)}.box .side{position:absolute;right:-53px;top:9px;width:53px;height:201px;background:linear-gradient(90deg,#729b89,#365c4d);transform:skewY(-25deg) rotateY(90deg);transform-origin:left}.box .top{position:absolute;left:10px;top:-44px;width:330px;height:44px;background:linear-gradient(#edfff6,#9bc9b4);transform:skewX(-34deg) rotateX(90deg);transform-origin:bottom}.brand{position:absolute;left:23px;top:20px;color:#16432f;font-size:15px;font-weight:1000}.title{position:absolute;left:23px;top:61px;color:#09251a;font-size:27px;font-weight:1000}.sub{position:absolute;left:23px;top:106px;color:#396b56;font-size:10px;font-weight:900}.leaf{position:absolute;right:22px;top:15px;font-size:43px;color:#1b8b57}.tab{position:absolute;right:19px;bottom:19px;width:113px;height:50px;border-radius:28px;background:linear-gradient(145deg,#fff,#bdcec6);box-shadow:inset -7px -8px 12px #0002,inset 7px 7px 12px #fff;transform:rotate(-8deg)}
-.bottle{width:230px;height:340px}.bottle .body{position:absolute;left:25px;bottom:0;width:180px;height:260px;border-radius:32px 32px 26px 26px;background:linear-gradient(90deg,#71ac8f,#f2fff8 30%,#d4eee0 72%,#5f967c);border:2px solid #e5fff4;box-shadow:inset -18px 0 20px #0002,0 28px 48px #0009;transform:translateZ(16px)}.bottle .cap{position:absolute;left:43px;top:28px;width:144px;height:67px;border-radius:12px;background:linear-gradient(#edf4f1,#82968d);box-shadow:0 10px 15px #0005;transform:translateZ(20px)}.bottle .label{position:absolute;left:50px;top:135px;width:130px;height:102px;background:#f4fff9;border-radius:9px;color:#123c2b;text-align:center;padding:17px 5px;font-weight:1000;transform:translateZ(30px)}.bottle .liquid{position:absolute;left:57px;bottom:24px;width:115px;height:60px;border-radius:50%;background:#aee0c5aa;transform:translateZ(29px)}
-.pouch{width:380px;height:230px}.pouch .face{position:absolute;inset:0;border-radius:10px;background:linear-gradient(140deg,#f7fff9,#c4dfd0 55%,#76aa91);border:2px solid #e6fff3;box-shadow:inset 0 0 28px #fff9,0 28px 50px #0009;transform:translateZ(22px)}.seal{position:absolute;left:0;right:0;height:19px;background:repeating-linear-gradient(90deg,#718e80 0 3px,#c5d9d0 3px 7px);z-index:2}.seal.t{top:0}.seal.b{bottom:0}.ptext{position:absolute;left:27px;top:65px;color:#123d2b;font-size:28px;font-weight:1000;line-height:1}.psub{position:absolute;left:28px;top:130px;color:#396c57;font-size:10px;font-weight:900}.tear{position:absolute;right:18px;top:37px;height:155px;border-left:2px dashed #547c69}
-.blister{width:400px;height:150px}.blister .base{position:absolute;inset:0;border-radius:12px;background:linear-gradient(145deg,#effff8,#bad7c8,#7ea895);border:2px solid #e6fff4;box-shadow:inset 0 0 25px #fff9,0 28px 50px #0009;transform:translateZ(15px)}.cells{position:absolute;inset:21px;display:grid;grid-template-columns:repeat(8,1fr);gap:9px;transform:translateZ(30px)}.cell{border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,#cbdad4 54%,#819b8f);box-shadow:inset -5px -6px 9px #0002,inset 4px 4px 9px #fff}
-.steps{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}.step{border:1px solid var(--line);border-radius:11px;padding:13px 10px;background:#091b13;text-align:center;font-size:10px;color:var(--m);min-height:78px;display:flex;flex-direction:column;justify-content:center;position:relative}.step:not(:last-child)::after{content:'→';position:absolute;right:-12px;top:28px;color:var(--g);font-size:16px;font-weight:900;z-index:2}.step b{display:block;color:var(--g2);font-size:17px}
-.materials{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:12px}.material{padding:14px;border:1px solid var(--line);border-radius:14px;background:#0a1c14}.material .score{color:var(--g);font-size:21px;font-weight:1000}.tag{display:inline-block;padding:4px 7px;border-radius:99px;background:#103425;border:1px solid #2b674a;color:#baf3d1;font-size:9px;margin:3px}
-footer{text-align:center;color:#698b7a;font-size:10px;padding:30px}
-@media(max-width:850px){.hero{grid-template-columns:1fr}.grid,.formgrid{grid-template-columns:1fr}.materials{grid-template-columns:repeat(2,minmax(160px,1fr))}.steps{grid-template-columns:repeat(7,minmax(120px,1fr))}.full{grid-column:auto}nav{display:none}h1{font-size:40px}.scene{height:400px}.obj{transform:translate(-50%,-50%) scale(.75) rotateX(10deg) rotateY(-21deg)}}
-</style></head>
+.mobileTop{display:none}
+#mobileOverlay{display:none}
+@media(max-width:900px){
+  body{overflow-x:hidden}
+  .mobileTop{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;padding:11px 14px;background:#08130fee;border-bottom:1px solid #234c39;backdrop-filter:blur(14px)}
+  .mobileTop button{font-size:20px;padding:7px 10px;background:#123022}
+  .mobileTop small{display:block;color:#759989;font-size:9px;letter-spacing:.6px;margin-top:2px}
+  .mobileTop #mobileRole{margin-left:auto;color:#56e59a;font-size:11px}
+  .app{display:block;min-height:calc(100vh - 58px)}
+  .side{position:fixed!important;left:-285px;top:0;width:270px;height:100vh!important;z-index:200;transition:left .25s ease;overflow:auto}
+  .side.open{left:0}
+  #mobileOverlay.open{display:block;position:fixed;inset:0;z-index:150;background:#0009}
+  .main{padding:16px;max-width:none}
+  .hero{padding:20px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .card{border-radius:15px;padding:15px}
+  .stat{min-height:100px}
+  .hero h2{font-size:34px}
+  .top{display:block}
+  .top>div:last-child{margin-top:10px}
+  .status{display:inline-block}
+  .table{font-size:12px;display:block;overflow-x:auto}
+  .table th,.table td{min-width:120px}
+}
+.matCard.selected{border-color:#56e59a;box-shadow:0 0 0 1px #56e59a44,0 18px 55px #0004}.costBar{height:10px;border-radius:99px;background:#07100d;border:1px solid #244b3a;overflow:hidden}.costBar i{display:block;height:100%;background:linear-gradient(90deg,#56e59a,#b9ffd2)}
+
+/* V17 mobile-first + drug-specific concept */
+.mobileTop{box-shadow:0 8px 25px #0005}
+.conceptPicker{display:flex;align-items:end;gap:14px;margin-bottom:14px}.conceptPicker>div:first-child{flex:1}.conceptMeta{display:flex;gap:5px;flex-wrap:wrap;padding-bottom:10px}.designGrid{align-items:stretch}.conceptCard{display:flex!important;flex-direction:column;align-items:center;justify-content:center;min-height:470px}.conceptCard .big3d{width:min(100%,420px);height:300px}.conceptCaption{text-align:center;color:var(--g2);font-weight:800;margin-top:10px;font-size:13px}.packageScene{width:220px;height:150px;position:relative;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-17deg);transition:.45s ease}.layer{position:absolute;border:2px solid #91f5b7;border-radius:14px;display:grid;place-items:center}.layer-back{width:205px;height:135px;left:24px;top:25px;background:#07110d;box-shadow:22px 22px 0 #06100b}.layer-main{width:205px;height:135px;left:0;top:0;background:linear-gradient(145deg,#174b35,#0b2419);box-shadow:0 0 55px #4fe39744}.layer-main span{font-size:17px;color:#baffd0;font-weight:950;transform:rotateZ(17deg) rotateX(-58deg)}.dosageVisual{position:absolute;z-index:5}.packageSeal{position:absolute;z-index:6}.packageScene.exploded{transform:translate(22px,-22px) rotateX(58deg) rotateZ(-17deg) scale(1.06)}
+/* tablet/capsule blister */
+.packageScene[data-form="Tablet"] .dosageVisual,.packageScene[data-form="Capsule"] .dosageVisual{width:170px;height:100px;left:17px;top:18px;background:radial-gradient(ellipse,#b9ffd2 0 7%,transparent 8%) 0 0/43px 38px;transform:translateZ(9px);border-radius:10px}.packageScene[data-form="Capsule"] .dosageVisual{background:linear-gradient(90deg,transparent 0 48%,#b9ffd2 49% 51%,transparent 52%) 0 0/42px 35px}.packageScene[data-form="Powder / Sachet"]{transform:rotateX(55deg) rotateZ(-8deg)}.packageScene[data-form="Powder / Sachet"] .layer-main,.packageScene[data-form="Powder / Sachet"] .layer-back{width:210px;height:125px;border-radius:10px}.packageScene[data-form="Powder / Sachet"] .dosageVisual{width:115px;height:52px;left:48px;top:36px;background:#c9d9c9;border-radius:50%;box-shadow:0 0 18px #b9ffd244;transform:translateZ(8px)}.packageScene[data-form="Syrup"]{transform:rotateX(5deg) rotateZ(-7deg)}.packageScene[data-form="Syrup"] .layer-main{width:92px;height:145px;left:60px;top:-5px;border-radius:18px 18px 14px 14px;background:linear-gradient(90deg,#173e2d,#245c41,#10271d)}.packageScene[data-form="Syrup"] .layer-back{width:100px;height:150px;left:68px;top:5px;border-radius:18px;background:#06100b;box-shadow:14px 14px 0 #06100b}.packageScene[data-form="Syrup"] .dosageVisual{width:48px;height:38px;left:82px;top:49px;background:#d7f0dc;border-radius:5px;box-shadow:0 0 12px #b9ffd244}.packageScene[data-form="Syrup"] .packageSeal{width:62px;height:16px;left:75px;top:-17px;border:2px solid #91f5b7;border-radius:5px;background:#123022}.packageScene[data-form="Oral film"] .dosageVisual{width:145px;height:90px;left:30px;top:22px;background:linear-gradient(135deg,#d8ffe4aa,#77c99a55);border:1px dashed #b9ffd2;border-radius:8px;transform:translateZ(10px)}.packageScene[data-form="Oral film"] .packageSeal{width:170px;height:5px;left:17px;top:108px;background:#b9ffd2;box-shadow:0 18px 0 #b9ffd2}
+@media(max-width:900px){
+  .side{left:-285px!important;right:auto;width:270px!important;position:fixed!important;top:0!important;height:100vh!important;border-right:1px solid var(--line)!important;border-bottom:0!important;z-index:200!important}
+  .side.open{left:0!important}
+  .app{display:block!important;min-height:calc(100vh - 58px)!important}
+  .mobileTop{display:flex!important;position:sticky!important;top:0!important;z-index:120!important}
+  .main{width:100%!important;max-width:none!important;padding:16px!important}
+  .designGrid{grid-template-columns:1fr!important}
+  .conceptPicker{flex-direction:column;align-items:stretch}
+  .conceptMeta{padding-bottom:0}
+}
+@media(max-width:560px){
+  .main{padding:12px!important}
+  .top{margin-bottom:14px}
+  .welcome h1{font-size:30px}
+  .welcome p{font-size:13px}
+  .hero{padding:16px!important}
+  .hero h2{font-size:30px!important}
+  .conceptCard{min-height:0!important;padding:12px!important}
+  .conceptCard .big3d{width:100%!important;height:250px!important}
+  .packageScene{transform:scale(.82) rotateX(58deg) rotateZ(-17deg)}
+  .packageScene.exploded{transform:scale(.86) translate(18px,-18px) rotateX(58deg) rotateZ(-17deg)}
+  .packageScene[data-form="Syrup"]{transform:scale(.9) rotateX(5deg) rotateZ(-7deg)}
+  .packageScene[data-form="Powder / Sachet"]{transform:scale(.82) rotateX(55deg) rotateZ(-8deg)}
+  .cta{width:100%}.cta button{flex:1;min-height:44px}
+  .table th,.table td{min-width:0!important;padding:9px 7px;font-size:11px}
+  .conceptMeta .tag{font-size:10px}
+}
+</style>
+</head>
 <body>
-<header><div class="logo">BioPharm<b>-Pack</b><span class="verified">✓ EVIDENCE FRAMEWORK</span></div>
-<nav><button class="active" onclick="go('home',this)">Home</button><button onclick="go('login',this)">Profile</button><button onclick="go('analysis',this)">Drug Analysis</button><button onclick="go('workflow',this)">Workflow</button><button onclick="go('design',this)">3D Design</button><button onclick="go('report',this)">Report</button></nav></header>
-<main>
-<section id="home" class="view on">
-<div class="card evidence-overview" style="margin-top:8px">
-  <div class="small">EVIDENCE & STANDARDS LAYER</div>
-  <h3>Official sources used by the framework</h3>
-  <p>This prototype does not copy proprietary monographs. It links to authoritative sources and uses them as the framework for stability, packaging and quality decisions.</p>
-  <div class="standards">
-    <a href="https://www.ipc.gov.in/mandates/indian-pharmacopoeia/indian-pharmacopoeia-ip-2026.html" target="_blank" rel="noopener">
-      <b>Indian Pharmacopoeia (IP) 2026</b><span>Indian Pharmacopoeia Commission • current Indian pharmacopoeial edition</span>
-    </a>
-    <a href="https://iponline.ipc.gov.in/jspui/" target="_blank" rel="noopener">
-      <b>IP Online</b><span>IPC's authorized digital access gateway for IP monographs/reference substances</span>
-    </a>
-    <a href="https://database.ich.org/sites/default/files/Q1A%28R2%29%20Guideline.pdf" target="_blank" rel="noopener">
-      <b>ICH Q1A(R2)</b><span>Stability testing principles for drug substances and products</span>
-    </a>
-    <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/container-closure-systems-packaging-human-drugs-and-biologics" target="_blank" rel="noopener">
-      <b>FDA Container-Closure Guidance (1999 Final)</b><span>Packaging material, compatibility and container-closure principles</span>
-    </a>
-    <a href="https://www.iso.org/standard/70729.html" target="_blank" rel="noopener">
-      <b>ISO 15378:2017 + Amd 1:2024</b><span>GMP quality-system requirements for primary packaging materials for medicinal products</span>
-    </a>
-    <a href="https://doi.usp.org/USPNF/USPNF_M2773_06_01.html" target="_blank" rel="noopener">
-      <b>USP &lt;659&gt;</b><span>Packaging and storage requirements</span>
-    </a>
-    <a href="https://doi.usp.org/USPNF/USPNF_M8009_05_01.html" target="_blank" rel="noopener">
-      <b>USP &lt;661.2&gt;</b><span>Plastic packaging systems for pharmaceutical use</span>
-    </a>
-    <a href="https://store.astm.org/d6400-26.html" target="_blank" rel="noopener">
-      <b>ASTM D6400-26</b><span>Compostability specification for applicable plastic packaging/materials</span>
-    </a>
+<div class="mobileTop">
+  <button id="menuBtn">☰</button>
+  <div><b>BioPharm<span style="color:#56e59a">-Pack</span></b><small>Research Workspace</small></div>
+  <span id="mobileRole">●</span>
+</div>
+<div id="mobileOverlay"></div>
+
+
+<div id="loginScreen" style="position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at 75% 10%,#174d35 0,#07100d 42%,#040907 100%);display:grid;place-items:center;padding:20px">
+  <div style="width:min(460px,100%);background:#0c1d16ee;border:1px solid #285b43;border-radius:26px;padding:30px;box-shadow:0 30px 100px #0009;backdrop-filter:blur(18px)">
+    <div style="font-size:26px;font-weight:950">BioPharm<span style="color:#56e59a">-Pack</span></div>
+    <div style="font-size:10px;color:#56e59a;font-weight:900;letter-spacing:1.6px;margin-top:5px">PHARMACEUTICAL PACKAGING RESEARCH PLATFORM</div>
+    <h1 style="font-size:34px;line-height:1.05;margin:28px 0 8px">Welcome to your research workspace.</h1>
+    <p style="color:#93ad9f;line-height:1.55">Select your research role to enter the BioPharm-Pack dashboard.</p>
+    <label style="display:block;color:#b8d5c5;font-size:12px;font-weight:900;margin-top:20px">RESEARCH ROLE</label>
+    <select id="loginRole" style="width:100%;padding:13px;border-radius:12px;background:#07130e;color:white;border:1px solid #2a5b45;margin-top:7px">
+      <option>Student</option><option>Researcher</option><option>Guide / Supervisor</option>
+    </select>
+    <label style="display:block;color:#b8d5c5;font-size:12px;font-weight:900;margin-top:14px">NAME</label>
+    <input id="loginName" placeholder="Enter your name" style="width:100%;padding:13px;border-radius:12px;background:#07130e;color:white;border:1px solid #2a5b45;margin-top:7px">
+    <label style="display:flex;gap:8px;align-items:flex-start;color:#9fb9aa;font-size:11px;margin-top:15px"><input type="checkbox" id="legalAccept" style="margin-top:2px"> I understand this is a research prototype and not regulatory certification or legal advice.</label><button id="enterBtn" style="width:100%;margin-top:18px;padding:13px;border:0;border-radius:12px;background:linear-gradient(135deg,#59e69b,#2caa70);color:#04110a;font-weight:950;cursor:pointer">Enter Research Dashboard →</button>
+    <div style="font-size:11px;color:#718e7f;margin-top:14px;line-height:1.45">Prototype login only. It does not verify identity, institution or authorization.</div>
   </div>
-  <div class="notice" style="margin-top:12px"><b>Evidence rule:</b> “Source-backed” means the framework is anchored to the cited authority. A drug-specific packaging recommendation still requires product-specific data and laboratory validation.</div>
 </div>
-<div class="hero"><div><span class="badge">AVISHKAR • RESEARCH WORKSPACE</span><h1>Evidence-led design. Verification by testing.</h1><p>A drug-first research platform for biodegradable pharmaceutical packaging with traceable sources, validation gates and dosage-specific 3D concepts.</p><button class="btn" onclick="go('login')">Create researcher profile →</button><button class="btn alt" onclick="go('analysis')">Start analysis</button><div class="trust" style="margin-top:15px"><b>Evidence layer:</b> Indian Pharmacopoeia 2026 / IP Online + established ICH stability principles + FDA container-closure framework. The site clearly separates verified source information from illustrative screening data.</div></div><div id="homeScene"></div></div><div class="grid"><div class="card"><h3>Identity & project profile</h3><p>Researcher, institution, project ID and versioned report metadata.</p></div><div class="card"><h3>Evidence traceability</h3><p>Every important recommendation is labelled as source-backed, derived, or requiring laboratory verification.</p></div><div class="card"><h3>Risk-based packaging</h3><p>Material, barrier, compatibility, closure and stability requirements are linked to the product profile.</p></div>
+
+<div class="app">
+<aside class="side" id="sidebar">
+<div class="logo">BioPharm<span>-Pack</span><span class="version">V16 • PACKAGING & COST INTELLIGENCE</span></div>
+<nav class="nav">
+<small>WORKSPACE</small>
+<button class="active navbtn" data-view="dashboard">▦ Dashboard</button>
+<button class="navbtn" data-view="packaging">♻ Packaging Lab</button><button class="navbtn" data-view="packagingCost">₹ Packaging & Cost</button><button class="navbtn" data-view="materials">◈ Material Intelligence</button>
+<button class="navbtn" data-view="drug">💊 Drug Analysis</button>
+<button class="navbtn" data-view="design">◇ 3D Concept</button>
+<button class="navbtn" data-view="validation">⌁ Validation</button>
+<small>DOCUMENTS</small>
+<button class="navbtn" data-view="report">▤ Research Report</button>
+<button class="navbtn" data-view="legal">⚖ Legal & Compliance</button>
+<button class="navbtn" data-view="sources">◎ Source Library</button>
+</nav>
+<div class="card" style="margin-top:20px;padding:13px"><div class="eyebrow">PROJECT MODE</div><p style="margin:6px 0;font-size:12px">Research / Avishkar prototype</p><span class="tag amber">LAB VALIDATION REQUIRED</span></div>
+</aside>
+
+<main class="main"><div class="mobileBar" style="display:none;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px"><button id="mobileMenu" aria-label="Open menu" style="font-size:22px;padding:8px 12px">☰</button><b>BioPharm-Pack</b><span class="tag green">V18</span></div>
+<div class="top"><div class="welcome"><div class="eyebrow">BIOPHARMACEUTICAL PACKAGING INTELLIGENCE</div><div id="roleLine" style="font-size:11px;color:#6f9180;margin-top:5px"></div><h1>Research dashboard</h1><p>Packaging-first • evidence-aware • drug-specific</p></div><div><div id="userBadge" class="status">● Research workspace</div><button id="logoutBtn" style="margin-top:8px;width:100%;display:none">Sign out</button></div></div>
+
+<section id="dashboard" class="view active">
+<div class="card hero"><div><div class="eyebrow">THE CORE IDEA</div><h2>Design the package first.<br>Then challenge it with the drug.</h2><p>Build a biodegradable packaging profile, add the medicine, map environmental and interaction risks, and generate a validation-oriented research plan.</p><div class="cta"><button class="primary navbtn" data-view="packaging">Create packaging profile →</button><button class="navbtn" data-view="legal">Read legal framework</button></div></div>
+<div class="card section">
+<div class="eyebrow">RESEARCHER PROFILE</div>
+<div class="grid2">
+<div><h3 id="dashName">Researcher</h3><p class="muted" id="dashRole">Role</p></div>
+<div><p style="margin:4px 0"><b>Project workspace</b></p><p class="muted">Local prototype • Evidence-aware research</p></div>
 </div>
-<div class="card" style="margin-top:14px">
-  <div class="small">ABOUT THE SOFTWARE</div>
-  <h3>What BioPharm-Pack actually does</h3>
-  <p><b>Input:</b> drug/product, dosage form, strength, ingredients and storage target.</p>
-  <p><b>Process:</b> risk screening → packaging requirements → biodegradable material/architecture concept → 3D visualization → validation plan.</p>
-  <p><b>Output:</b> a research decision-support record, not a regulatory approval or a substitute for pharmacopoeial testing.</p>
-  <div class="status-row"><span class="status">IP 2026</span><span class="status">ICH Q1A(R2)</span><span class="status">FDA CCS</span><span class="status">ISO 15378</span><span class="status">USP PACKAGING</span><span class="status">ASTM COMPOSTABILITY</span></div>
-</div></section>
+</div>
+<div class="big3d"><div class="box3d">BIO<br>PACK</div></div></div>
 
-<section id="login" class="view"><span class="badge">PROFILE • TRUST CENTER</span><h2>Researcher profile & evidence identity</h2><div class="card"><div class="formgrid"><div><label>Full name</label><input id="name" placeholder="Your name"></div><div><label>College / Institution</label><input id="college" placeholder="Institution"></div><div><label>Department</label><input id="dept" placeholder="Pharmacy / department"></div><div><label>Course / Year</label><input id="course" placeholder="B.Pharm / M.Pharm • Year"></div><div><label>Project title</label><input id="project" placeholder="Project title"></div><div><label>Project ID / guide code</label><input id="pid" placeholder="Optional project ID"></div></div><br><button class="btn" onclick="saveProfile()">Save researcher profile</button><button class="btn alt" onclick="loadDemoProfile()">Use demo profile</button></div><div id="profileCard" style="margin-top:14px"></div><div class="notice" style="margin-top:14px"><b>Privacy:</b> This prototype stores profile data only in the browser's local storage. It does not prove a person's identity, college affiliation or professional credentials. Real identity verification would require an authenticated backend and official institutional verification.</div></section>
+<div class="card section" style="border-color:#316b50">
+<div style="display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap">
+<div><div class="eyebrow">QUICK RESEARCH ACTIONS</div><h3 style="margin:6px 0">Continue your project</h3><p class="muted" style="margin:0">Start with the biodegradable packaging profile, then add your drug.</p></div>
+<div class="cta" style="margin-top:0"><button class="primary navbtn" data-view="materials">Explore materials</button><button class="navbtn" data-view="packaging">Build package</button><button class="navbtn" data-view="drug">Add drug</button></div>
+</div></div>
+<div class="section"><div class="grid">
+<div class="card stat"><div class="ico">♻️</div><div class="muted">Packaging status</div><div class="num" id="sPack">Not started</div></div>
+<div class="section"><div class="grid">
+<div class="card"><div class="eyebrow">COST PROFILE</div><h3>Cost-Effective</h3><p class="muted">Candidates prioritized for comparatively favorable material and processing economics.</p><span class="tag green">ECONOMIC SCREENING</span></div>
+<div class="card"><div class="eyebrow">SUPPLY PROFILE</div><h3>Readily Available</h3><p class="muted">Candidates that may be sourced through established or accessible supply channels.</p><span class="tag green">AVAILABILITY SCREENING</span></div>
+<div class="card"><div class="eyebrow">SPECIALIZED</div><h3>Higher-Cost / Specialized</h3><p class="muted">Advanced polymers, composites, coatings or barrier structures requiring specialized sourcing.</p><span class="tag amber">SPECIALIZED</span></div>
+<div class="card"><div class="eyebrow">CORE CATEGORY</div><h3>Biodegradable Pharmaceutical Packaging</h3><p class="muted">Packaging candidates assessed for drug-specific requirements and end-of-life evidence.</p><span class="tag green">RESEARCH CANDIDATE</span></div>
+</div></div>
+<div class="card stat"><div class="ico">💊</div><div class="muted">Drug profile</div><div class="num" id="sDrug">Not added</div></div>
+<div class="card stat"><div class="ico">🧪</div><div class="muted">Validation gaps</div><div class="num" id="sGap">—</div></div>
+<div class="card stat"><div class="ico">📄</div><div class="muted">Report</div><div class="num" id="sReport">Ready</div></div>
+</div></div>
+<div class="grid2 section">
+<div class="card"><div class="eyebrow">WORKFLOW</div><h3>Project progress</h3><div class="progress"><i id="bar"></i></div><p id="progressText" class="muted">Step 1 of 4 • Packaging profile</p><table class="table"><tr><th>Stage</th><th>Status</th></tr><tr><td>Biodegradable packaging</td><td id="w1"><span class="tag amber">PENDING</span></td></tr><tr><td>Drug profile</td><td id="w2"><span class="tag amber">PENDING</span></td></tr><tr><td>Screening analysis</td><td id="w3"><span class="tag amber">PENDING</span></td></tr><tr><td>Validation/report</td><td id="w4"><span class="tag amber">PENDING</span></td></tr></table></div>
+<div class="card"><div class="eyebrow">SCIENTIFIC POSITIONING</div><h3>What the platform does</h3><ul class="muted"><li>Captures packaging properties before drug selection.</li><li>Separates source-backed information from derived screening.</li><li>Flags tests needed before suitability can be concluded.</li><li>Does not issue regulatory approval or safety certification.</li></ul></div>
+</div>
+</section>
 
-<section id="analysis" class="view"><span class="badge">01 • DRUG INTELLIGENCE</span><h2>Drug + formulation → packaging specification</h2><div class="card"><div class="formgrid"><div><label>Drug / product</label><input id="drug" placeholder="e.g. Paracetamol"></div><div><label>Dosage form</label><select id="form" onchange="update3D()"><option>Tablet</option><option>Capsule</option><option>Syrup</option><option>Powder / Sachet</option><option>Oral film</option></select></div><div><label>Strength</label><input id="strength" placeholder="e.g. 500 mg"></div><div><label>Storage target</label><select id="storage"><option>Room temperature</option><option>Controlled cool</option><option>Refrigerated</option></select></div><div class="full"><label>API + excipients / ingredients</label><textarea id="ingredients" rows="5" placeholder="One ingredient per line"></textarea></div></div><br><button class="btn" onclick="analyze()">Run evidence-aware screening</button></div><div id="analysisResult"></div></section>
+<section id="packaging" class="view">
+<div class="section"><div class="eyebrow">STEP 1</div><h2>Biodegradable Pharmaceutical Packaging Lab</h2><p class="muted">Define the packaging material and its evidence profile before selecting the drug.</p></div>
+<div class="grid">
+<div class="card"><h3>Material Identity & Classification</h3><p class="muted">PLA, PHA, cellulose, starch, chitosan, composites or a custom formulation.</p><button class="primary" onclick="alert('Material library ready for selection in the next project step.')">Open material library</button></div>
+<div class="card"><h3>Barrier profile</h3><p class="muted">Moisture • oxygen • light • heat • mechanical protection.</p><span class="tag">WVTR</span><span class="tag">OTR</span><span class="tag">Light</span></div>
+<div class="card"><h3>Closure & integrity</h3><p class="muted">Seal, closure, leakage and container-closure integrity considerations.</p><span class="tag amber">TEST REQUIRED</span></div>
+<div class="card"><h3>End-of-life</h3><p class="muted">Biodegradable and compostable are different claims; use evidence appropriate to the claim.</p><span class="tag green">EVIDENCE CONTROLLED</span></div>
+</div>
+<div class="card section"><h3>Packaging profile</h3><div class="grid2"><div><label>Material</label><input id="mat" class="search" placeholder="e.g. PLA / PHA / cellulose composite"></div><div><label>Format</label><input id="format" class="search" placeholder="e.g. blister, bottle, sachet"></div><div><label>Moisture barrier</label><input id="moist" class="search" placeholder="Measured / unknown"></div><div><label>Oxygen barrier</label><input id="oxy" class="search" placeholder="Measured / unknown"></div></div>
+<div style="margin:12px 0">
+<label style="display:block;color:#b8d5c5;font-size:12px;font-weight:900;margin-bottom:6px">MATERIAL ECONOMIC / SUPPLY CATEGORY</label>
+<select id="category" class="search">
+<option>Cost-Effective</option>
+<option>Readily Available</option>
+<option>Higher-Cost / Specialized</option>
+<option>Biodegradable Pharmaceutical Packaging Material — Research Candidate</option>
+</select>
+</div>
+<div class="card" style="margin:12px 0;background:#0a1912"><div class="eyebrow">RECOMMENDED ARCHITECTURE</div><p id="packRecommendation" class="muted" style="margin:7px 0">Select a dosage form in Drug Analysis to generate a packaging concept. This is a research concept only.</p></div><button class="primary" id="savePack">Save packaging profile →</button>
+<p id="packMsg" class="muted"></p></div>
+</section>
 
-<section id="workflow" class="view"><span class="badge">02 • BIODEGRADABLE PACKAGING WORKFLOW</span><h2>Material → package → contamination control → validation</h2><div class="steps"><div class="step"><b>1</b>Drug profile</div><div class="step"><b>2</b>Material screen</div><div class="step"><b>3</b>Architecture</div><div class="step"><b>4</b>Fabrication</div><div class="step"><b>5</b>Clean/close</div><div class="step"><b>6</b>Test</div><div class="step"><b>7</b>Stability</div></div>
-<div class="card" style="margin-top:14px"><h3>Contamination-control gates</h3><table><tr><th>Gate</th><th>What must be controlled</th><th>Evidence</th></tr><tr><td>Raw material</td><td>Identity, purity, appropriate grade, incoming quality</td><td>CoA / characterization</td></tr><tr><td>Manufacturing</td><td>Hygiene, particulate/bioburden controls as applicable</td><td>Validated process / monitoring</td></tr><tr><td>Package closure</td><td>Leakage, seal integrity, microbial ingress where relevant</td><td>Container-closure integrity testing</td></tr><tr><td>Drug contact</td><td>Interaction, migration, extractables/leachables</td><td>Compatibility + E&L assessment</td></tr><tr><td>Protection</td><td>Moisture, oxygen, light, temperature exposure</td><td>Barrier + stability studies</td></tr><tr><td>End-of-life</td><td>Biodegradation/compostability claim in defined environment</td><td>Appropriate recognized test method</td></tr></table></div>
-<div class="notice" style="margin-top:14px"><b>Correct scientific claim:</b> the goal is not to promise “fully contamination-free” from software. The goal is a package whose contamination risk and container-closure integrity are controlled and demonstrated through appropriate testing.</div></section>
 
-<section id="design" class="view"><span class="badge">03 • 3D DESIGN ENGINE</span><h2 id="designTitle">Dosage-specific 3D packaging</h2><div id="designScene"></div><div class="grid" style="margin-top:14px"><div class="card"><h3>Outer bio-layer</h3><p>Structural biodegradable layer.</p></div><div class="card"><h3>Functional barrier</h3><p>Moisture / oxygen / light protection based on product needs.</p></div><div class="card"><h3>Drug-contact interface</h3><p>Compatibility and E&L assessment required.</p></div></div></section>
 
-<section id="report" class="view"><span class="badge">04 • TRACEABLE REPORT</span><h2>Avishkar-ready report</h2><div id="reportBox" class="card"><p>Run analysis to generate a report.</p></div></section>
-</main><footer>BioPharm-Pack is a research prototype. Source-backed facts are distinguished from illustrative drug screening data. It does not certify identity, regulatory compliance, safety, sterility, or contamination-free status.</footer>
+<section id="packagingCost" class="view">
+<div class="section"><div class="eyebrow">PACKAGING & COST INTELLIGENCE • V19</div><h2>Dosage-form packaging selector</h2><p class="muted">Choose a research packaging architecture first, then compare candidate biodegradable material families and indicative material costs.</p></div>
+<div class="grid">
+<div class="card"><div style="font-size:28px">💊</div><h3>Tablet</h3><span class="tag green">Priority ★★★★★</span><p class="muted">Blister / unit-dose cavity. Focus on moisture, oxygen, light, seal integrity and mechanical protection.</p><b>Candidate</b><p class="muted">PLA-based multilayer or cellulose-based barrier structure</p></div>
+<div class="card"><div style="font-size:28px">💊</div><h3>Capsule</h3><span class="tag green">Priority ★★★★★</span><p class="muted">Blister / strip pack. Focus on moisture barrier and tight closure.</p><b>Candidate</b><p class="muted">PLA-based or cellulose-based multilayer</p></div>
+<div class="card"><div style="font-size:28px">🧂</div><h3>Powder / ORS</h3><span class="tag green">Priority ★★★★★</span><p class="muted">Heat-sealed sachet with strong moisture barrier and controlled seal.</p><b>Candidate</b><p class="muted">Starch/PLA composite or cellulose-based multilayer</p></div>
+<div class="card"><div style="font-size:28px">🧴</div><h3>Syrup</h3><span class="tag amber">Priority ★★★★</span><p class="muted">Bottle + closure. Evaluate moisture/light protection, leakage and closure integrity.</p><b>Candidate</b><p class="muted">PLA/PHA-based rigid structure or validated biodegradable polymer system</p></div>
+<div class="card"><div style="font-size:28px">📄</div><h3>Oral Film</h3><span class="tag green">Priority ★★★★★</span><p class="muted">Individual unit-dose pouch. Focus on moisture barrier and seal performance.</p><b>Candidate</b><p class="muted">Cellulose-based or PLA-based film structure</p></div>
+<div class="card"><div style="font-size:28px">📦</div><h3>Secondary Packaging</h3><span class="tag green">Priority ★★★★★</span><p class="muted">Folding carton / protective box. Provides secondary mechanical and light protection.</p><b>Candidate</b><p class="muted">Paperboard with appropriate biodegradable/compostable coating where justified</p></div>
+</div>
+
+
+<style>
+.productGallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.productCard{overflow:hidden;position:relative}.productImage{height:170px;border-radius:14px;background:radial-gradient(circle at 50% 35%,#174b35,#08130f 72%);border:1px solid #285940;display:grid;place-items:center;margin-bottom:13px}.productImage svg{width:88%;height:88%;max-width:240px}.productLabel{display:flex;justify-content:space-between;gap:8px;align-items:center}.productLabel h3{margin:0}.productNote{font-size:11px;color:#769889;margin-top:7px;line-height:1.45}@media(max-width:900px){.productGallery{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.productGallery{grid-template-columns:1fr}.productImage{height:190px}}
+</style>
+<div class="section"><div class="eyebrow">BIODEGRADABLE PRODUCT CONCEPTS • V19</div><h2>Packaging visuals linked to dosage form</h2><p class="muted">Concept images show how the selected biodegradable packaging architecture could appear in a research prototype. They are visual concepts, not manufacturing drawings.</p></div>
+<div class="productGallery">
+<div class="card productCard"><div class="productImage"><svg viewBox="0 0 240 160" role="img" aria-label="Biodegradable tablet blister concept"><rect x="28" y="35" width="184" height="92" rx="12" fill="#b7d7c4" stroke="#91f5b7" stroke-width="3"/><g fill="#eaf8ee" stroke="#5c9475" stroke-width="2"><ellipse cx="65" cy="65" rx="18" ry="13"/><ellipse cx="120" cy="65" rx="18" ry="13"/><ellipse cx="175" cy="65" rx="18" ry="13"/><ellipse cx="65" cy="101" rx="18" ry="13"/><ellipse cx="120" cy="101" rx="18" ry="13"/><ellipse cx="175" cy="101" rx="18" ry="13"/></g><path d="M30 35h180" stroke="#2c6c4d" stroke-width="8" opacity=".55"/><text x="120" y="24" text-anchor="middle" fill="#b9ffd2" font-size="12" font-weight="700">BIO BLISTER</text></svg></div><div class="productLabel"><h3>Tablet Blister</h3><span class="tag green">PLA / cellulose</span></div><p class="productNote">Unit-dose concept with barrier-focused structure and controlled sealing.</p></div>
+<div class="card productCard"><div class="productImage"><svg viewBox="0 0 240 160" role="img" aria-label="Biodegradable ORS sachet concept"><path d="M45 24h150l-10 112H55z" fill="#e0eadf" stroke="#91f5b7" stroke-width="3"/><path d="M45 42h150M45 116h150" stroke="#4f8066" stroke-width="5" stroke-dasharray="6 5"/><circle cx="120" cy="78" r="28" fill="#d2c9a9" opacity=".9"/><text x="120" y="83" text-anchor="middle" fill="#264c38" font-size="13" font-weight="900">ORS</text><path d="M120 16v10" stroke="#b9ffd2" stroke-width="4"/><text x="120" y="151" text-anchor="middle" fill="#b9ffd2" font-size="12" font-weight="700">HEAT-SEALED SACHET</text></svg></div><div class="productLabel"><h3>ORS Sachet</h3><span class="tag green">Starch / PLA</span></div><p class="productNote">Moisture-focused concept with heat-sealed edges and tear notch.</p></div>
+<div class="card productCard"><div class="productImage"><svg viewBox="0 0 240 160" role="img" aria-label="Biodegradable syrup bottle concept"><rect x="92" y="20" width="56" height="18" rx="5" fill="#244c39" stroke="#91f5b7" stroke-width="2"/><path d="M84 36h72l10 20v72c0 9-8 16-17 16H91c-9 0-17-7-17-16V56z" fill="#4b8c69" stroke="#91f5b7" stroke-width="3"/><rect x="88" y="67" width="64" height="42" rx="6" fill="#dff1df"/><text x="120" y="84" text-anchor="middle" fill="#245039" font-size="11" font-weight="900">SYRUP</text><text x="120" y="99" text-anchor="middle" fill="#245039" font-size="8">BIO BOTTLE</text><path d="M75 58h90" stroke="#b9ffd2" stroke-width="3"/><text x="120" y="151" text-anchor="middle" fill="#b9ffd2" font-size="12" font-weight="700">BOTTLE + CLOSURE</text></svg></div><div class="productLabel"><h3>Syrup Bottle</h3><span class="tag amber">PLA / PHA</span></div><p class="productNote">Rigid-container concept; closure and leakage integrity require validation.</p></div>
+<div class="card productCard"><div class="productImage"><svg viewBox="0 0 240 160" role="img" aria-label="Biodegradable oral film pouch concept"><rect x="38" y="28" width="164" height="105" rx="10" fill="#d7efe0" stroke="#91f5b7" stroke-width="3"/><rect x="55" y="43" width="130" height="70" rx="8" fill="#7ec39c" opacity=".38" stroke="#5c9475" stroke-dasharray="5 4"/><path d="M52 121h136" stroke="#3b7558" stroke-width="7"/><text x="120" y="72" text-anchor="middle" fill="#2a5940" font-size="12" font-weight="900">ORAL FILM</text><text x="120" y="90" text-anchor="middle" fill="#2a5940" font-size="9">UNIT DOSE</text><text x="120" y="151" text-anchor="middle" fill="#b9ffd2" font-size="12" font-weight="700">SEALED POUCH</text></svg></div><div class="productLabel"><h3>Oral Film Pouch</h3><span class="tag green">Cellulose / PLA</span></div><p class="productNote">Individual pouch concept emphasizing moisture barrier and seal performance.</p></div>
+</div>
+
+<div class="section"><div class="eyebrow">TENTATIVE COST CHART</div><h2>Indicative biodegradable material cost</h2><p class="muted">Material/raw-material screening estimates only. These are not finished pharmaceutical package prices and not procurement quotations.</p></div>
+<div class="card" style="overflow-x:auto"><table class="table"><thead><tr><th>Material family</th><th>Indicative ₹/kg</th><th>Category</th><th>Typical research role</th><th>Cost confidence</th></tr></thead><tbody>
+<tr><td><b>Starch-based</b></td><td>₹100–250/kg</td><td><span class="tag green">Cost-Effective</span></td><td>Films / composites / sachet research</td><td><span class="tag amber">Indicative</span></td></tr>
+<tr><td><b>Cellulose-based</b></td><td>₹150–400/kg</td><td><span class="tag green">Cost-Effective / Moderate</span></td><td>Barrier films / coatings / structures</td><td><span class="tag amber">Indicative</span></td></tr>
+<tr><td><b>PLA</b></td><td>₹150–350/kg</td><td><span class="tag green">Moderate</span></td><td>Films / trays / structural layers</td><td><span class="tag amber">Indicative</span></td></tr>
+<tr><td><b>PBAT-based biodegradable film</b></td><td>₹180–300/kg</td><td><span class="tag green">Readily Available</span></td><td>Flexible film / blend research</td><td><span class="tag amber">Indicative</span></td></tr>
+<tr><td><b>PHA</b></td><td>₹2,500–4,000+/kg</td><td><span class="tag amber">Higher-Cost / Specialized</span></td><td>Advanced biodegradable polymer research</td><td><span class="tag amber">Indicative</span></td></tr>
+<tr><td><b>Chitosan-based</b></td><td>Highly formulation-dependent</td><td><span class="tag amber">Higher-Cost / Specialized</span></td><td>Film-forming / coating research</td><td><span class="tag amber">Variable</span></td></tr>
+</tbody></table></div>
+
+<div class="grid2 section">
+<div class="card"><div class="eyebrow">UNIT-COST ESTIMATOR</div><h3>Illustrative material-only calculation</h3><p class="muted">Estimated material cost = material price (₹/kg) × package material mass (kg).</p><div class="grid2"><div><label>Material price ₹/kg</label><input id="costKg" class="search" type="number" value="200" min="0"></div><div><label>Package mass (g)</label><input id="packMass" class="search" type="number" value="5" min="0" step="0.1"></div></div><button class="primary" id="calcCost">Calculate material-only cost</button><h2 id="unitCost" style="margin-top:16px">₹1.00</h2><p class="muted">Excludes conversion, tooling, printing, coatings, sealing, QA/testing, MOQ, transport and other costs.</p></div>
+<div class="card"><div class="eyebrow">COST LOGIC</div><h3>Why finished cost can differ</h3><ul class="muted"><li>Material grade and pharmaceutical-contact suitability can change cost.</li><li>Barrier coatings or multilayer structures may be needed.</li><li>Conversion, forming, sealing, printing and tooling add cost.</li><li>Small research quantities can have higher effective unit cost.</li><li>Supplier, MOQ, transport and quality testing can materially change the final figure.</li></ul></div>
+</div>
+
+<div class="card section"><div class="eyebrow">EVIDENCE NOTE</div><h3>How to present this in Avishkar</h3><p class="muted">“The cost chart is an indicative research-level material-cost screen, not a finished pharmaceutical packaging quotation. The platform compares candidate material families first; final packaging selection requires characterization, product–package compatibility, stability, barrier and integrity testing.”</p><div class="cta"><button class="primary" onclick="nav('packaging')">Use packaging profile →</button><button onclick="nav('materials')">Compare materials →</button></div></div>
+
+<div class="card section"><div class="eyebrow">SOURCE BASIS</div><p class="muted">Indicative ranges are synthesized from recent biodegradable-packaging reviews and Indian industrial supplier listings available to the project. Vendor listings are treated as market indicators only; they do not establish pharmaceutical grade, regulatory status or suitability.</p>
+<p class="muted" style="font-size:11px">Research references: ScienceDirect reviews on cellulose/starch/chitosan/PLA/PHA packaging; 2025 review on bio-based biodegradable barrier materials; RSC Sustainable Food Technology review on bio-based packaging; 2024 Alexandria Engineering Journal review; 2024 pharmaceutical-specific ecofriendly packaging review; Indian supplier listings for starch, PLA, PBAT and PHA materials.</p></div>
+</section>
+
+<section id="materials" class="view">
+<div class="section"><div class="eyebrow">MATERIAL INTELLIGENCE • EVIDENCE-AWARE</div><h2>Biodegradable Pharmaceutical Packaging Materials</h2><p class="muted">A research screening library. Material class does not by itself establish pharmaceutical suitability.</p></div>
+<div class="card" style="margin-bottom:14px"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag green">Cost-Effective</span><span class="tag green">Readily Available</span><span class="tag amber">Higher-Cost / Specialized</span><span class="tag">Research Candidate</span></div><p class="muted" style="margin-bottom:0">Cost and availability are project-level screening categories, not universal market claims. Confirm current supplier pricing, grade, availability and regulatory status before procurement.</p></div>
+<div class="grid">
+<div class="card matCard"><div style="font-size:30px">🧬</div><h3>PLA</h3><span class="tag">Bio-based polyester</span><p class="muted">Candidate for films, trays and structural components. Moisture/oxygen barrier performance is grade- and construction-dependent.</p><b>Screening focus</b><p class="muted">Barrier performance • mechanical properties • product-contact suitability • end-of-life evidence</p><button class="primary chooseMat" data-mat="PLA">Use as research candidate</button></div>
+<div class="card matCard"><div style="font-size:30px">🦠</div><h3>PHA</h3><span class="tag">Biodegradable polyester family</span><p class="muted">Material family with grade-dependent processing and barrier properties.</p><b>Screening focus</b><p class="muted">Grade identity • barrier properties • mechanical performance • product-contact assessment</p><button class="primary chooseMat" data-mat="PHA">Use as research candidate</button></div>
+<div class="card matCard"><div style="font-size:30px">🌿</div><h3>Cellulose-based</h3><span class="tag">Renewable polymer family</span><p class="muted">Potential film/coating/structure candidate; moisture performance depends on formulation and coating.</p><b>Screening focus</b><p class="muted">Water-vapor barrier • coating integrity • strength • product interaction</p><button class="primary chooseMat" data-mat="Cellulose-based">Use as research candidate</button></div>
+<div class="card matCard"><div style="font-size:30px">🌾</div><h3>Starch-based</h3><span class="tag">Renewable polymer</span><p class="muted">Potential biodegradable film/formulation candidate; water sensitivity can be important.</p><b>Screening focus</b><p class="muted">Moisture barrier • mechanical strength • formulation stability • end-of-life evidence</p><button class="primary chooseMat" data-mat="Starch-based">Use as research candidate</button></div>
+<div class="card matCard"><div style="font-size:30px">🧪</div><h3>Chitosan-based</h3><span class="tag">Biopolymer</span><p class="muted">Film-forming candidate. Packaging performance and product-contact suitability require characterization.</p><b>Screening focus</b><p class="muted">Moisture sensitivity • mechanical performance • interaction • material purity</p><button class="primary chooseMat" data-mat="Chitosan-based">Use as research candidate</button></div>
+<div class="card matCard"><div style="font-size:30px">🧩</div><h3>Biopolymer Composite</h3><span class="tag">Specialized</span><p class="muted">Multi-layer or composite architecture designed to combine barrier and mechanical functions.</p><b>Screening focus</b><p class="muted">Layer compatibility • adhesion • barrier performance • extractables/leachables</p><button class="primary chooseMat" data-mat="Biopolymer Composite">Use as research candidate</button></div>
+</div>
+<div class="card section"><h3>How the platform screens materials</h3><table class="table">
+<tr><th>Requirement</th><th>Why it matters</th><th>Evidence status</th></tr>
+<tr><td>Containment</td><td>Prevent leakage, diffusion/permeation and loss of contents.</td><td><span class="tag green">SOURCE FRAMEWORK</span></td></tr>
+<tr><td>Protection</td><td>Protect product from relevant moisture, light, oxygen, biological contamination and mechanical damage.</td><td><span class="tag green">SOURCE FRAMEWORK</span></td></tr>
+<tr><td>Compatibility</td><td>Packaging should not adversely affect the product; interaction may involve chemical reactions or leaching.</td><td><span class="tag green">SOURCE FRAMEWORK</span></td></tr>
+<tr><td>Integrity</td><td>Closure/seal performance must be demonstrated for the intended package.</td><td><span class="tag amber">LAB TEST</span></td></tr>
+<tr><td>Environmental claim</td><td>Biodegradable/compostable claims require evidence appropriate to the exact claim and conditions.</td><td><span class="tag amber">VERIFY</span></td></tr>
+</table></div>
+</section>
+
+<section id="drug" class="view"><div class="section"><div class="eyebrow">STEP 2 • V18 DECISION ENGINE</div><h2>Drug–Packaging Analysis</h2><p class="muted">Translate drug characteristics into packaging requirements and explain why a candidate is recommended. This is preliminary decision support—not a suitability certification.</p></div>
+<div class="card"><div class="grid2"><div><label>Drug / product name</label><input id="drugName" class="search" placeholder="e.g. Paracetamol"></div><div><label>Dosage form</label><select id="dosage" class="search"><option>Tablet</option><option>Capsule</option><option>Syrup</option><option>Powder / Sachet</option><option>Oral film</option></select></div><div><label>Strength</label><input id="strength" class="search" placeholder="e.g. 500 mg"></div><div><label>Known sensitivity</label><input id="sensitivity" class="search" placeholder="Moisture / oxygen / light / unknown"></div></div><button class="primary" id="run">Run preliminary screening →</button><p id="drugMsg" class="muted"></p></div>
+<div class="grid2 section"><div class="card"><div class="eyebrow">WHY THIS RECOMMENDATION?</div><h3 id="whyTitle">Decision pathway</h3><div id="whyText" class="muted">Enter the drug and run screening. The engine will map dosage form + sensitivity to a research packaging architecture.</div><div class="cta"><span class="tag green" id="evidenceStrength">Evidence strength: Limited</span><span class="tag amber">Validation required</span></div></div><div class="card scoreBox"><div class="eyebrow">SCREENING OUTPUT</div><h3 id="riskHeadline">Awaiting drug profile</h3><div id="riskTags"><span class="tag">Moisture —</span><span class="tag">Oxygen —</span><span class="tag">Light —</span><span class="tag">Thermal —</span></div><p class="muted" id="riskNote">No compatibility score is issued. The prototype identifies risk areas and required tests instead.</p></div></div>
+<div class="card section"><div class="eyebrow">SCREENING MATRIX</div><div style="overflow-x:auto"><table class="table"><thead><tr><th>Requirement</th><th>Drug-side signal</th><th>Packaging implication</th><th>Validation</th></tr></thead><tbody id="screenMatrix"><tr><td>Moisture</td><td>Pending</td><td>Barrier level to be justified</td><td>WVTR / moisture study</td></tr><tr><td>Oxygen</td><td>Pending</td><td>Barrier level to be justified</td><td>OTR where applicable</td></tr><tr><td>Light</td><td>Pending</td><td>Light protection if justified</td><td>Photostability / exposure study</td></tr><tr><td>Integrity</td><td>All packages</td><td>Seal / closure control</td><td>Integrity / leak testing</td></tr></tbody></table></div></div>
+</section>
+
+<section id="design" class="view"><div class="section"><div class="eyebrow">3D CONCEPT LAB • V18</div><h2>Drug-specific packaging concept</h2><p class="muted">Select a dosage form to visualize a research packaging architecture. Concept visualization only—not a manufacturing drawing.</p></div><div class="card conceptPicker"><div><label for="conceptForm">Dosage form</label><select id="conceptForm" class="search"><option>Tablet</option><option>Capsule</option><option>Syrup</option><option>Powder / Sachet</option><option>Oral film</option></select></div><div class="conceptMeta"><span class="tag green" id="conceptDrug">Drug: not selected</span><span class="tag" id="conceptPack">Packaging: research concept</span></div></div><div class="grid2 designGrid"><div class="card conceptCard"><div class="big3d" id="scene3d"><div class="packageScene" id="packageScene"><div class="layer layer-back"></div><div class="layer layer-main"><span id="modelLabel">BIO PACK</span></div><div class="dosageVisual" id="dosageVisual"></div><div class="packageSeal" id="packageSeal"></div></div></div><div class="cta"><button id="explode">Explode layers</button><button id="reset3d">Reset</button></div><div class="conceptCaption" id="conceptCaption">Tablet → biodegradable blister / unit-dose cavity</div></div><div class="card"><div class="eyebrow">PACKAGING ARCHITECTURE</div><h3 id="architectureTitle">Tablet blister concept</h3><table class="table"><tr><td>Drug-contact layer</td><td id="archContact">Compatible contact layer to be characterized</td></tr><tr><td>Functional barrier</td><td id="archBarrier">Moisture / oxygen / light as required</td></tr><tr><td>Biodegradable structure</td><td id="archStructure">PLA-based or cellulose-based barrier structure</td></tr><tr><td>Seal / closure</td><td id="archSeal">Seal integrity + contamination control</td></tr><tr><td>Validation focus</td><td id="archValidation">Compatibility, stability, barrier & integrity testing</td></tr></table><p class="muted" style="margin-bottom:0">⚠ Research concept only. Material and package suitability require laboratory validation.</p></div></div></section>
+
+<section id="validation" class="view"><div class="section"><div class="eyebrow">VALIDATION PLAN • V18</div><h2>Evidence Matrix — what must be demonstrated?</h2><p class="muted">A judge-ready validation pathway. “Pending” means the software has identified a study requirement; it does not imply failure or success.</p></div>
+<div class="card"><div class="grid2"><div><h3 id="valCase">Selected case: Complete drug profile first</h3><p class="muted" id="valSummary">Run Drug–Packaging Analysis to populate the case-specific matrix.</p></div><div><div class="eyebrow">EVIDENCE STRENGTH</div><h3 id="valEvidence">Limited / literature-screened</h3><p class="muted">Evidence strength is not a regulatory approval or compatibility certificate.</p></div></div></div>
+<div class="card section" style="overflow-x:auto"><table class="table"><thead><tr><th>Test domain</th><th>What to measure</th><th>Suggested output</th><th>Status</th></tr></thead><tbody id="validationMatrix"><tr><td>Material identity</td><td>Composition, thickness, relevant physical properties</td><td>Specification sheet / lab result</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Moisture barrier</td><td>Water-vapor transmission / moisture uptake</td><td>WVTR or justified moisture study</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Oxygen barrier</td><td>Oxygen transmission where relevant</td><td>OTR or justified rationale</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Mechanical</td><td>Tensile / puncture / compression as appropriate</td><td>Strength and failure observations</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Seal / closure</td><td>Seal integrity, leakage, package integrity</td><td>Integrity test result</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Drug compatibility</td><td>Product–package interaction; E/L where applicable</td><td>Compatibility / analytical evidence</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Stability</td><td>Product quality under justified storage conditions</td><td>Assay / related quality attributes as applicable</td><td><span class="tag amber">PENDING</span></td></tr><tr><td>Biodegradation</td><td>Claim-specific end-of-life testing</td><td>Condition-specific biodegradation/compostability evidence</td><td><span class="tag amber">PENDING</span></td></tr></tbody></table></div>
+<div class="card section"><div class="eyebrow">AVISHKAR CASE STUDY</div><h3>ORS powder → biodegradable sachet</h3><div class="caseSteps" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px"><span class="tag green">1 • Moisture-sensitive powder</span><span class="tag green">2 • High moisture barrier</span><span class="tag green">3 • Heat-sealed sachet</span><span class="tag amber">4 • WVTR + seal tests</span><span class="tag amber">5 • Stability + compatibility</span></div><p class="muted" style="margin-bottom:0">Use this as a demonstration pathway; do not present the material choice as proven until the corresponding laboratory results exist.</p></div>
+</section>
+
+<section id="report" class="view"><div class="section"><div class="eyebrow">DOCUMENT</div><h2>Research Report</h2></div><div class="card"><h3 id="reportTitle">BioPharm-Pack preliminary report</h3><p id="reportText" class="muted">Complete the packaging and drug steps to populate this summary.</p><button onclick="window.print()">Print / Save as PDF</button></div></section>
+
+<section id="legal" class="view legal">
+<div class="section"><div class="eyebrow">LEGAL & COMPLIANCE CENTER</div><h2>Research-use legal documentation</h2><p class="muted">These documents are protective project language, not a substitute for advice from a qualified lawyer or regulatory professional.</p></div>
+<div class="card legalbox">
+<h3>1. Research Prototype & Regulatory Disclaimer</h3>
+<p>BioPharm-Pack is a research, educational and innovation prototype intended to support preliminary pharmaceutical packaging research. The platform does not constitute regulatory approval, certification, legal advice, quality assurance, GMP certification, pharmacopoeial certification, sterility assurance, contamination-free certification, or a determination that any packaging system is suitable for manufacture, marketing or human use.</p>
+<p>Any screening result is a decision-support output based on the information entered and the evidence available to the platform. A positive screening result must not be interpreted as proof of pharmaceutical suitability. Material characterization, packaging performance, product–package compatibility, stability, container-closure integrity, extractables/leachables and other applicable studies must be performed by appropriately qualified personnel before any real pharmaceutical application.</p>
+<h3>2. India Regulatory Notice</h3>
+<p>In India, drugs are regulated under the Drugs and Cosmetics Act, 1940 and Drugs and Cosmetics Rules, 1945, with responsibilities shared between central and state regulators. Applicable packaging, labelling, manufacturing, licensing, quality and distribution requirements depend on the product and use case. The platform does not replace those requirements.</p>
+<p>The CDSCO publishes the Drugs Rules and regulatory notifications on its official website. Users must check the current official requirements applicable to their product.</p>
+<h3>3. Packaging Claims</h3>
+<p>The terms “biodegradable”, “compostable”, “bio-based” and similar environmental claims are not interchangeable. A claim should be supported by appropriate material, test and end-of-life evidence. The platform must not be used to create an unsupported environmental claim.</p>
+<h3>4. Data & Privacy Notice</h3>
+<p>This prototype is designed to operate as a local research interface. Do not enter confidential, proprietary, patient-identifiable, unpublished clinical, trade-secret or other sensitive information unless the deployment has an appropriate security and governance system. Local browser storage is not identity verification and should not be treated as secure enterprise storage.</p>
+<h3>5. Intellectual Property & Sources</h3>
+<p>Official standards, pharmacopoeial monographs and regulatory documents may be protected by copyright or access restrictions. BioPharm-Pack should link to authorized sources rather than reproduce protected content without permission. Source version and access date should be retained for traceability.</p>
+<h3>6. User Responsibility</h3>
+<p>The user is responsible for verifying source currency, product-specific requirements, applicable Indian and international regulations, experimental results, and conclusions before using any output for research, manufacturing, regulatory submission or commercial decisions.</p>
+<h3>7. No Warranty</h3>
+<p>The prototype is provided for research and demonstration purposes. To the extent permitted by applicable law, no warranty is made regarding completeness, accuracy, uninterrupted operation or fitness for a particular purpose.</p>
+</div>
+
+<div class="card" style="margin-top:14px"><div class="eyebrow">SOURCE CONTROL</div>
+<p class="muted">Core packaging principles in this prototype are aligned to WHO Guidelines on Packaging for Pharmaceutical Products (TRS 902 Annex 9), FDA's final 1999 container-closure guidance, and ISO 15378:2017 with its 2024 amendment. ASTM D6400-26 is used only when discussing the specific claim of aerobic municipal/industrial compostability of applicable plastics/products.</p>
+</div>
+<div class="cta"><button class="primary" onclick="window.print()">Print legal notice</button></div>
+</section>
+
+<section id="sources" class="view"><div class="section"><div class="eyebrow">SOURCE LIBRARY</div><h2>Authoritative starting points</h2></div>
+<div class="grid">
+<div class="card"><h3>CDSCO — Drugs Rules</h3><p class="muted">Official Indian regulatory source for Drugs Rules, 1945 and amendments.</p><a href="https://cdsco.gov.in/opencms/opencms/en/Acts-and-rules/Drugs-Rules/" target="_blank">Open CDSCO ↗</a></div>
+<div class="card"><h3>Drugs & Cosmetics Act</h3><p class="muted">Official CDSCO source for the Act and regulatory framework.</p><a href="https://www.cdsco.gov.in/opencms/opencms/en/Acts-and-rules/" target="_blank">Open source ↗</a></div>
+<div class="card"><h3>Legal Metrology</h3><p class="muted">Official Department of Consumer Affairs source for packaged commodity rules and notifications.</p><a href="https://consumeraffairs.nic.in/acts-and-rules/legal-metrology-act" target="_blank">Open source ↗</a></div>
+<div class="card"><h3>ISO 15378:2017 + Amd 1:2024</h3><p class="muted">Primary packaging materials for medicinal products; GMP-oriented quality-management requirements.</p><a href="https://www.iso.org/standard/70729.html" target="_blank">ISO official page ↗</a></div><div class="card"><h3>ASTM D6400-26</h3><p class="muted">Specific specification for plastics/products designed for aerobic municipal or industrial composting facilities.</p><a href="https://store.astm.org/d6400-26.html" target="_blank">ASTM official page ↗</a></div><div class="card"><h3>WHO Pharmaceutical Packaging</h3><p class="muted">Technical guidance relevant to pharmaceutical packaging and protection of products.</p><a href="https://www.who.int/docs/default-source/medicines/norms-and-standards/guidelines/regulatory-standards/trs902-annex9.pdf" target="_blank">Open WHO ↗</a></div>
+</div>
+</section>
+<div class="footer">BioPharm-Pack • Research prototype • Verify current official requirements before relying on any regulatory conclusion.</div>
+</main>
+</div>
 <script>
-const DRUGS={
-"paracetamol":{form:"Tablet",strength:"500 mg",r:{Moisture:"Moderate",Oxygen:"Moderate",Light:"Low",Heat:"Moderate"},path:["oxidation","moisture exposure"],pack:["moisture barrier","oxygen barrier"]},
-"aspirin":{form:"Tablet",strength:"325 mg",r:{Moisture:"High",Oxygen:"Moderate",Light:"Low",Heat:"Moderate"},path:["hydrolysis","moisture exposure"],pack:["high moisture barrier","tight closure"]},
-"ibuprofen":{form:"Tablet",strength:"400 mg",r:{Moisture:"Moderate",Oxygen:"Low",Light:"Low",Heat:"Moderate"},path:["thermal stress","moisture exposure"],pack:["moisture barrier","mechanical protection"]},
-"omeprazole":{form:"Capsule",strength:"20 mg",r:{Moisture:"High",Oxygen:"Moderate",Light:"Moderate",Heat:"High"},path:["moisture","environmental sensitivity","thermal stress"],pack:["high moisture barrier","strong closure"]},
-"vitamin c":{form:"Tablet",strength:"500 mg",r:{Moisture:"High",Oxygen:"High",Light:"High",Heat:"High"},path:["oxidation","photodegradation","moisture","thermal degradation"],pack:["high moisture barrier","oxygen barrier","light barrier"]},
-"paracetamol syrup":{form:"Syrup",strength:"120 mg/5 mL",r:{Moisture:"Low",Oxygen:"Moderate",Light:"Moderate",Heat:"Moderate"},path:["oxidation/light exposure"],pack:["light-protective bottle","tight closure","leak-proof dispensing"]},
-"oral rehydration salts":{form:"Powder / Sachet",strength:"Product-specific",r:{Moisture:"High",Oxygen:"Low",Light:"Low",Heat:"Moderate"},path:["moisture uptake/caking"],pack:["very high moisture barrier","heat-sealed sachet"]}
-};
-let state={profile:{}};
-function go(id,btn){document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');if(btn){document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}scrollTo(0,0)}
-const FORM3D={
-  "Tablet":"tablet",
-  "Capsule":"capsule",
-  "Syrup":"syrup",
-  "Powder / Sachet":"sachet",
-  "Oral film":"film"
-};
-function scene(type,name="PRODUCT"){
-  const mode=FORM3D[type]||"tablet";
-  const n=(name||"PRODUCT").toUpperCase();
-  let o="";
-  if(mode==="syrup"){
-    o=`<div class="obj bottle"><div class="body"></div><div class="cap"></div><div class="label">${n}<br><small>ORAL SYRUP</small></div><div class="liquid"></div></div>`;
-  }else if(mode==="sachet"){
-    o=`<div class="obj pouch"><div class="face"></div><div class="seal t"></div><div class="seal b"></div><div class="ptext">${n}<br><small>SACHET</small></div><div class="psub">MOISTURE BARRIER • HEAT SEAL</div><div class="tear"></div></div>`;
-  }else if(mode==="capsule"){
-    o=`<div class="obj blister"><div class="base"></div><div class="cells">${Array.from({length:8},()=>'<div class="cell"></div>').join('')}</div></div>`;
-  }else if(mode==="film"){
-    o=`<div class="obj pouch filmpack"><div class="face"></div><div class="seal t"></div><div class="seal b"></div><div class="ptext">${n}<br><small>ORAL FILM POUCH</small></div><div class="psub">MOISTURE BARRIER • UNIT DOSE</div></div>`;
-  }else{
-    o=`<div class="obj box"><div class="front"><div class="brand">BIOPHARM-PACK</div><div class="title">${n}<br>PACK</div><div class="sub">BARRIER • SEAL • COMPATIBILITY</div><div class="leaf">♧</div><div class="tab"></div></div><div class="side"></div><div class="top"></div></div>`;
-  }
-  return `<div class="scene"><div class="shadow"></div>${o}<div style="position:absolute;right:15px;top:15px;background:#06130edb;border:1px solid #2a5a44;border-radius:12px;padding:10px;font-size:10px;line-height:1.6">● Outer bio-layer<br>● Functional barrier<br>● Drug-contact interface</div><div style="position:absolute;left:15px;bottom:15px;background:#06130edb;border:1px solid #2a5a44;border-radius:12px;padding:9px;font-size:10px;color:#baf6d1">3D concept • not a validated manufacturing drawing</div></div>`;
+(function(){
+function show(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));let x=document.getElementById(id);if(!x)return;x.classList.add('active');document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});update();}
+function nav(id){show(id,document.querySelector('.navbtn[data-view="'+id+'"]'))}
+document.addEventListener('click',e=>{let b=e.target.closest('.navbtn');if(b){e.preventDefault();nav(b.dataset.view)}})
+function update(){let p=localStorage.getItem('bppack'),d=localStorage.getItem('bpdrug');document.getElementById('sPack').textContent=p?'Saved':'Not started';document.getElementById('sDrug').textContent=d?'Added':'Not added';let n=(p?1:0)+(d?1:0);document.getElementById('bar').style.width=(n===0?25:n===1?50:n>=2?75:25)+'%';document.getElementById('progressText').textContent=n===0?'Step 1 of 4 • Packaging profile':n===1?'Step 2 of 4 • Add drug':'Step 3 of 4 • Preliminary screening';let ev=document.getElementById('sEvidence');if(ev)ev.textContent=d?'Limited':'Limited';let gap=document.getElementById('sGap');if(gap)gap.textContent='8';}
+document.getElementById('savePack').onclick=function(){let p={material:mat.value.trim()||'Custom',format:format.value.trim()||'Not specified',moist:moist.value.trim()||'Unknown',oxy:oxy.value.trim()||'Unknown'};localStorage.setItem('bppack',JSON.stringify(p));packMsg.textContent='✓ Packaging profile saved. Continue to Drug Analysis.';update();setTimeout(()=>nav('drug'),350)}
+document.getElementById('run').onclick=function(){let d={name:drugName.value.trim()||'Custom drug/product',form:dosage.value,strength:strength.value.trim()||'—',sensitivity:sensitivity.value.trim()||'Unknown'};if(!localStorage.getItem('bppack')){drugMsg.textContent='Please save the packaging profile first.';nav('packaging');return}localStorage.setItem('bpdrug',JSON.stringify(d));let p=JSON.parse(localStorage.getItem('bppack')||'{}');let sens=(d.sensitivity||'unknown').toLowerCase();let high=sens.includes('high');let moisture=high&&sens.includes('moist')?'High':(d.form==='Powder / Sachet'?'High':'Moderate');let oxygen=high&&sens.includes('oxygen')?'High':'Moderate';let light=high&&sens.includes('light')?'High':(d.form==='Syrup'?'Moderate':'Low');let thermal=high&&sens.includes('heat')?'High':'Moderate';let pack=d.form==='Tablet'?'Blister / unit-dose cavity':d.form==='Capsule'?'Blister / strip pack':d.form==='Syrup'?'Bottle + closure':d.form==='Powder / Sachet'?'Heat-sealed sachet':'Individual unit-dose pouch';document.getElementById('drugMsg').textContent='✓ Screening captured. Requirements mapped to a research packaging architecture.';let wt=document.getElementById('whyText');if(wt)wt.textContent=d.name+' ('+d.form+') → '+pack+'. The engine prioritizes '+(moisture==='High'?'moisture barrier, ':'')+(oxygen==='High'?'oxygen barrier, ':'')+(light==='High'?'light protection, ':'')+'seal/closure integrity and product–package compatibility testing. Material suitability remains unproven until laboratory validation.';let wh=document.getElementById('whyTitle');if(wh)wh.textContent='Recommended research architecture: '+pack;let rh=document.getElementById('riskHeadline');if(rh)rh.textContent='Risk areas identified — no compatibility score';let rt=document.getElementById('riskTags');if(rt)rt.innerHTML='<span class="tag '+(moisture==='High'?'amber':'')+'">Moisture '+moisture+'</span><span class="tag '+(oxygen==='High'?'amber':'')+'">Oxygen '+oxygen+'</span><span class="tag '+(light==='High'?'amber':'')+'">Light '+light+'</span><span class="tag '+(thermal==='High'?'amber':'')+'">Thermal '+thermal+'</span><span class="tag">Integrity required</span>';let rows=[['Moisture',moisture,moisture==='High'?'High moisture barrier':'Barrier level to be justified','WVTR / moisture study'],['Oxygen',oxygen,oxygen==='High'?'High oxygen barrier':'Barrier level to be justified','OTR where applicable'],['Light',light,light==='High'?'Light-protective structure':'Assess need from product data','Photostability / exposure study'],['Integrity','Required','Seal / closure control','Integrity / leak testing']];let tb=document.getElementById('screenMatrix');if(tb)tb.innerHTML=rows.map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('');let ve=document.getElementById('evidenceStrength');if(ve)ve.textContent='Evidence strength: Limited';let vc=document.getElementById('valCase');if(vc)vc.textContent='Selected case: '+d.name+' • '+d.form;let vs=document.getElementById('valSummary');if(vs)vs.textContent='Research architecture: '+pack+'. Priority risks: '+moisture+', '+oxygen+' oxygen, '+light+' light and '+thermal+' thermal sensitivity. Validate before any pharmaceutical use.';document.getElementById('reportTitle').textContent=d.name+' × packaging screening';document.getElementById('reportText').textContent='Preliminary decision-support output for '+d.form+'. Recommended research architecture: '+pack+'. Required validation includes material characterization, barrier testing, integrity, product–package compatibility, stability and claim-specific biodegradation evidence.';update();setTimeout(()=>nav('validation'),350)}
+document.getElementById('explode').onclick=function(){model.style.transform='translate(25px,-20px) rotateX(55deg) rotateZ(-18deg) scale(1.12)'}
+document.getElementById('reset3d').onclick=function(){model.style.transform='rotateX(55deg) rotateZ(-18deg)'}
+
+document.addEventListener("click",function(e){
+ let b=e.target.closest(".chooseMat");
+ if(!b)return;
+ let p=JSON.parse(localStorage.getItem("bppack")||"{}");
+ p.material=b.dataset.mat;
+ document.querySelectorAll(".matCard").forEach(x=>x.classList.remove("selected"));
+ b.closest(".matCard")?.classList.add("selected");
+ localStorage.setItem("bppack",JSON.stringify(p));
+ let m=document.getElementById("mat"); if(m)m.value=p.material;
+ let msg=document.getElementById("packMsg"); if(msg)msg.textContent="✓ "+p.material+" selected as a research candidate. Add packaging properties before screening.";
+ let navBtn=document.querySelector('.navbtn[data-view="packaging"]'); 
+ if(navBtn){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById("packaging").classList.add("active");document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));navBtn.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+});
+
+update();
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+function setLogin(){
+  const role=localStorage.getItem("bp_role"),name=localStorage.getItem("bp_name");
+  if(role&&name){$("loginScreen").style.display="none";$("userBadge").textContent="● "+name+" • "+role;$("logoutBtn").style.display="block";$("roleLine").textContent="Signed in as "+role+" • "+name;}
 }
-document.getElementById("homeScene").innerHTML=scene("Powder / Sachet","ORS");
-document.getElementById("designScene").innerHTML=scene(document.getElementById("form").value,"PRODUCT");
-function update3D(){
-  const f=document.getElementById("form").value;
-  const drug=document.getElementById("drug").value||"PRODUCT";
-  document.getElementById("designScene").innerHTML=scene(f,drug);
-  document.getElementById("designTitle").textContent=f+" • 3D packaging concept";
+$("enterBtn").addEventListener("click",function(){
+  if(!$("loginName").value.trim()){alert("Please enter your name.");return}
+  if(!$("legalAccept").checked){alert("Please acknowledge the research-prototype notice.");return}
+  localStorage.setItem("bp_role",$("loginRole").value);localStorage.setItem("bp_name",$("loginName").value.trim());setLogin();
+});
+$("logoutBtn").addEventListener("click",function(){
+  localStorage.removeItem("bp_role");localStorage.removeItem("bp_name");location.reload();
+});
+const oldSave=$("savePack").onclick;
+$("savePack").onclick=function(){
+  let p=JSON.parse(localStorage.getItem("bppack")||"{}");
+  p.category=$("category").value;
+  localStorage.setItem("bppack",JSON.stringify(p));
+  if(oldSave) oldSave();
+};
+window.addEventListener("DOMContentLoaded",function(){
+  let p=JSON.parse(localStorage.getItem("bppack")||"null");
+  if(p&&$("category"))$("category").value=p.category||"Cost-Effective";
+  setLogin();
+});
+})();
+</script>
+
+
+<script>
+(function(){
+const menu=document.getElementById("menuBtn"),side=document.getElementById("sidebar"),overlay=document.getElementById("mobileOverlay"); const mm=document.getElementById("mobileMenu"); mm&&mm.addEventListener("click",()=>{menu&&menu.click()});
+function closeMenu(){side.classList.remove("open");overlay.classList.remove("open")}
+menu&&menu.addEventListener("click",()=>{side.classList.toggle("open");overlay.classList.toggle("open")});
+overlay&&overlay.addEventListener("click",closeMenu);
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".navbtn");
+ if(b && window.innerWidth<=900) setTimeout(closeMenu,100);
+});
+function profile(){
+ const n=localStorage.getItem("bp_name")||"Researcher";
+ const r=localStorage.getItem("bp_role")||"Student";
+ const a=document.getElementById("dashName"),b=document.getElementById("dashRole"),m=document.getElementById("mobileRole");
+ if(a)a.textContent=n;
+ if(b)b.textContent=r+" • BioPharm-Pack workspace";
+ if(m)m.textContent="● "+r;
 }
-function saveProfile(){const nameEl=document.getElementById("name"),collegeEl=document.getElementById("college"),deptEl=document.getElementById("dept"),courseEl=document.getElementById("course"),projectEl=document.getElementById("project"),pidEl=document.getElementById("pid");state.profile={name:nameEl.value||"Researcher",college:collegeEl.value||"",dept:deptEl.value||"",course:courseEl.value||"",project:projectEl.value||"",pid:pidEl.value||""};localStorage.setItem("BioPharmProfile",JSON.stringify(state.profile));renderProfile();go("home")}
-function loadDemoProfile(){state.profile={name:"Student Researcher",college:"Pharmacy College",dept:"Pharmaceutics",course:"B.Pharm",project:"BioPharm-Pack Avishkar",pid:"DEMO-AV-001"};localStorage.setItem("BioPharmProfile",JSON.stringify(state.profile));renderProfile()}
-function renderProfile(){let p=state.profile;if(!p.name)return;document.getElementById("profileCard").innerHTML=`<div class="card"><div class="profile"><div class="avatar">${p.name[0].toUpperCase()}</div><div><b>${p.name}</b><div class="small">${p.college} • ${p.dept}</div></div></div><p><b>Project:</b> ${p.project}<br><b>Course:</b> ${p.course}<br><b>Project ID:</b> ${p.pid||"Not provided"}</p><div class="trust">✓ Profile saved locally • Identity/college verification is not performed by this prototype.</div></div>`}
-try{state.profile=JSON.parse(localStorage.getItem("BioPharmProfile")||"{}");renderProfile()}catch(e){}
-function v(x){return x==="High"?25:x==="Moderate"?15:5}
-function resp(k,x){if(k==="Moisture")return x==="High"?"High moisture barrier + seal study":"Moisture barrier study";if(k==="Oxygen")return x==="High"?"Low oxygen transmission + oxidation study":"Oxygen barrier study";if(k==="Light")return x==="High"?"Light protection + photostability":"Light transmission check";return x==="High"?"Thermal stability / excursion study":"Temperature assessment"}
-function analyze(){let name=document.getElementById("drug").value.trim()||"Custom product",d=DRUGS[name.toLowerCase()];if(!d)d={form:document.getElementById("form").value,strength:document.getElementById("strength").value||"—",r:{Moisture:"Moderate",Oxygen:"Moderate",Light:"Moderate",Heat:"Moderate"},path:["product-specific pathway unknown"],pack:["product-specific barrier and compatibility studies required"]};document.getElementById("form").value=d.form;update3D();let rows=Object.entries(d.r),fit=Math.max(0,100-rows.reduce((a,[,x])=>a+v(x),0)),n=document.getElementById("ingredients").value.split("\n").filter(Boolean).length,compat=Math.min(95,55+n*7);state.drug={name,d,fit,compat};document.getElementById("analysisResult").innerHTML=`<div class="grid" style="margin-top:14px"><div class="card"><div class="small">PRELIMINARY PACKAGE FIT</div><div class="kpi">${fit}/100</div><div class="meter"><i style="width:${fit}%"></i></div></div><div class="card"><div class="small">COMPATIBILITY SCREEN</div><div class="kpi">${compat}%</div><p>heuristic indicator only; not a measured result</p></div><div class="card"><div class="small">PRIMARY RISK</div><div class="kpi">${rows.sort((a,b)=>v(b[1])-v(a[1]))[0][0]}</div><p>target validation study</p></div></div><div class="card" style="margin-top:14px"><h3>${name} • ${d.strength}</h3><table><tr><th>Factor</th><th>Risk</th><th>Response</th></tr>${rows.map(([k,x])=>`<tr><td>${k}</td><td class="${x==="High"?"high":x==="Moderate"?"med":"low"}">${x}</td><td>${resp(k,x)}</td></tr>`).join("")}</table><p><b>Pathways:</b> ${d.path.join(", ")}.</p><p><b>Architecture:</b> ${d.pack.join(", ")}.</p><div class="status-row"><span class="status">SOURCE: FRAMEWORK</span><span class="status">DRUG DATA: DEMO / VERIFY</span><span class="status">LAB VALIDATION: REQUIRED</span></div><button class="btn" onclick="go('design')">View 3D →</button><button class="btn alt" onclick="go('workflow')">Validation workflow</button><button class="btn alt" onclick="makeReport()">Report</button></div>`;makeReport()}
-function makeReport(){if(!state.drug)return;let d=state.drug.d,p=state.profile;document.getElementById("reportBox").innerHTML=`<h3>BioPharm-Pack — Traceable Research Report</h3><p><b>Researcher:</b> ${p.name||"Not entered"} • <b>Institution:</b> ${p.college||"Not entered"} • <b>Project:</b> ${p.project||"Not entered"}</p><p><b>Product:</b> ${state.drug.name} • <b>Form:</b> ${d.form} • <b>Strength:</b> ${d.strength}</p><div class="grid"><div class="card"><div class="small">PACKAGE FIT</div><div class="kpi">${state.drug.fit}/100</div></div><div class="card"><div class="small">COMPATIBILITY SCREEN</div><div class="kpi">${state.drug.compat}%</div></div><div class="card"><div class="small">EVIDENCE STATUS</div><div class="kpi">VERIFY</div></div></div><h3>Evidence status</h3><p>Drug-specific screening records in this demo are illustrative. Official pharmacopoeial monographs should be retrieved from authorized IP Online access rather than copied into the application. Stability and container-closure recommendations are mapped to established regulatory principles.</p><h3>Validation checklist</h3><p>Material identity/purity • barrier performance • closure integrity • drug–package compatibility • extractables/leachables • microbiological assessment where relevant • mechanical performance • product stability • biodegradation/end-of-life testing.</p><div class="trust"><b>Source verification:</b> IP 2026 / IP Online, ICH Q1A(R2) stability principles, and FDA container-closure framework. See source links below.</div><p class="source"><b>Official sources:</b> Indian Pharmacopoeia Commission IP 2026 and IP Online; ICH Q1A(R2); FDA Container Closure Systems guidance; ISO 15378; USP &lt;659&gt; and &lt;661.2&gt;; ASTM D6400 where compostability claims are applicable.</p><div class="notice"><b>Important:</b> The current embedded drug records are demonstration records, not copied official monographs. Replace them only with drug-specific evidence retrieved from authorized/official sources and then independently validate the packaging experimentally.</div>`}
-</script></body></html>
+window.addEventListener("DOMContentLoaded",profile);
+
+function recommend(form){
+ const map={
+  "Tablet":"Blister / unit-dose cavity • PLA-based or cellulose-based barrier structure • evaluate moisture/oxygen/light barrier + seal integrity.",
+  "Capsule":"Blister / strip pack • PLA-based or cellulose-based multilayer • prioritize moisture barrier + tight closure.",
+  "Powder / Sachet":"Heat-sealed sachet • starch/PLA composite or cellulose-based multilayer • prioritize moisture barrier + seal integrity.",
+  "Syrup":"Bottle + closure • biodegradable rigid polymer research candidate • evaluate leakage, closure integrity, light/moisture protection.",
+  "Oral film":"Individual unit-dose pouch • cellulose-based or PLA-based film structure • prioritize moisture barrier + seal performance."
+ };
+ const el=$("packRecommendation"); if(el) el.textContent=map[form]||map["Tablet"];
+}
+const calc=$("calcCost");
+if(calc)calc.addEventListener("click",function(){const kg=Math.max(0,parseFloat($("costKg").value)||0),g=Math.max(0,parseFloat($("packMass").value)||0);$("unitCost").textContent="₹"+(kg*g/1000).toFixed(2);});
+const dosageEl=$("dosage"); if(dosageEl){dosageEl.addEventListener("change",()=>recommend(dosageEl.value));recommend(dosageEl.value)}
+})();
+</script>
+
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const configs={
+  "Tablet":{title:"Tablet blister concept",pack:"Blister / unit-dose cavity",contact:"Compatible contact layer to be characterized",barrier:"Moisture / oxygen / light as required",structure:"PLA-based or cellulose-based barrier structure",seal:"Heat/pressure seal integrity + contamination control",validation:"Compatibility, stability, barrier & integrity testing",caption:"Tablet → biodegradable blister / unit-dose cavity"},
+  "Capsule":{title:"Capsule blister concept",pack:"Blister / strip pack",contact:"Contact-layer compatibility to be characterized",barrier:"Prioritize moisture barrier + tight closure",structure:"PLA-based or cellulose-based multilayer",seal:"Tight closure + seal integrity",validation:"Moisture protection, compatibility, stability & integrity",caption:"Capsule → biodegradable blister / strip pack"},
+  "Syrup":{title:"Liquid bottle concept",pack:"Bottle + closure",contact:"Drug-contact polymer must be characterized",barrier:"Moisture/light protection as required",structure:"Biodegradable rigid-polymer research candidate",seal:"Closure integrity + leak control",validation:"Leakage, compatibility, stability & closure integrity",caption:"Syrup → biodegradable bottle + closure"},
+  "Powder / Sachet":{title:"Powder sachet concept",pack:"Heat-sealed sachet",contact:"Contact layer requires formulation compatibility testing",barrier:"High moisture barrier + appropriate oxygen barrier",structure:"Starch/PLA composite or cellulose-based multilayer",seal:"Heat seal + tear-notch integrity",validation:"Moisture uptake, caking, seal integrity & stability",caption:"Powder / ORS → sealed biodegradable sachet"},
+  "Oral film":{title:"Unit-dose oral-film pouch",pack:"Individual unit-dose pouch",contact:"Film-contact compatibility to be characterized",barrier:"Prioritize moisture barrier + seal performance",structure:"Cellulose-based or PLA-based film structure",seal:"Perimeter seal + unit-dose integrity",validation:"Moisture, film stability, compatibility & seal integrity",caption:"Oral film → individual biodegradable unit-dose pouch"}
+ };
+ function render(form){
+  const c=configs[form]||configs.Tablet, scene=$("packageScene");
+  if(!scene)return; scene.dataset.form=form; $("architectureTitle").textContent=c.title; $("conceptPack").textContent="Packaging: "+c.pack; $("archContact").textContent=c.contact; $("archBarrier").textContent=c.barrier; $("archStructure").textContent=c.structure; $("archSeal").textContent=c.seal; $("archValidation").textContent=c.validation; $("conceptCaption").textContent=c.caption; $("modelLabel").textContent=form==="Syrup"?"BIO BOTTLE":form==="Powder / Sachet"?"BIO SACHET":form==="Oral film"?"BIO POUCH":form.toUpperCase(); $("dosageVisual").setAttribute("aria-label",form+" dosage representation");}
+ const cf=$("conceptForm");
+ if(cf){
+  const d=JSON.parse(localStorage.getItem("bpdrug")||"null"); if(d&&d.form&&configs[d.form]){cf.value=d.form;$("conceptDrug").textContent="Drug: "+(d.name||"selected")+" • "+(d.strength||"—");} else {const current=$("dosage"); if(current)cf.value=current.value; const n=d?.name||"not selected"; $("conceptDrug").textContent="Drug: "+n;}
+  cf.addEventListener("change",()=>{render(cf.value); const d=JSON.parse(localStorage.getItem("bpdrug")||"null"); if(d){d.form=cf.value;localStorage.setItem("bpdrug",JSON.stringify(d));}}); render(cf.value);
+ }
+ const ex=$("explode"),rs=$("reset3d"); ex&&ex.addEventListener("click",()=>$("packageScene").classList.add("exploded")); rs&&rs.addEventListener("click",()=>$("packageScene").classList.remove("exploded"));
+ window.addEventListener("storage",()=>{const d=JSON.parse(localStorage.getItem("bpdrug")||"null");if(d&&cf){cf.value=d.form||cf.value;$("conceptDrug").textContent="Drug: "+(d.name||"selected")+" • "+(d.strength||"—");render(cf.value)}});
+})();
+</script>
+</body></html>
