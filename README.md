@@ -69,10 +69,25 @@ V33 LOGO INTEGRATION FIX
 - Kept the rest of the application unchanged.
 - 3D visuals remain research/concept visualizations and are not regulatory, stability, compatibility, sterility or manufacturing evidence.
 
-## V42 public-site alignment update
+## V43 public-site alignment update
 - Improved responsive alignment for Home / About / Privacy / Terms / Support navigation.
 - Public document pages now remain centered and contained on desktop, tablet and mobile widths.
 - Expanded Privacy Policy with data handling, browser storage, optional server activity, sensitive-data guidance, external sources, and retention/deletion guidance.
 - Expanded Terms & Conditions with permitted use, verification duty, no-certification language, illustrative concept limitations, user content, intellectual property, availability/changes, and limitation-of-reliance guidance.
 - Added project support contact: vedantchavan1117@gmail.com.
 - Existing research workspace and 3D Concept functionality preserved.
+
+
+## V43 Research Paper & Laboratory Validation
+- Added Research Paper Generator with structured abstract, introduction, objectives, drug profile, packaging concept, methodology, results/discussion, limitations, future work and references.
+- Added laboratory validation matrix covering material identity, thickness, WVTR, OTR, light barrier, mechanical properties, seal strength, package integrity, compatibility, extractables/leachables risk assessment, stability, assay, degradation products, dissolution/release, moisture uptake, microbial quality where applicable, biodegradation and environmental conditioning.
+- Experimental results are never fabricated; fields remain explicitly marked for actual laboratory entry and source verification.
+- Added print/save-to-PDF research-paper view.
+
+
+## V45 — Research Dashboard & Print Fix
+- Fixed the Research Report printing bug caused by the generated report retaining `display:none` during print.
+- Print mode now explicitly displays the generated research paper and hides the rest of the application.
+- Added print lifecycle handling so the normal dashboard returns after printing.
+- Preserved white paper background, dark high-contrast text, bordered academic tables, A4 portrait layout and Times New Roman print styling.
+- Version labels synchronized to V45 in the research report layer.
